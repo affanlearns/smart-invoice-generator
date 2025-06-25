@@ -7,38 +7,79 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header style="background-color: #007bff; color: white; padding: 15px; text-align: center; border-radius: 0 0 10px 10px;">
-  <h1>🧾 Smart Invoice Generator</h1>
-</header>
-  <div class="container">
-    <h1>Smart Invoice Generator</h1>
 
+  <!-- Header -->
+  <header style="background-color: #007bff; color: white; padding: 15px; text-align: center; border-radius: 0 0 10px 10px;">
+    <h1>🧾 Smart Invoice Generator</h1>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+    <h2>Enter Invoice Details</h2>
     <form id="invoice-form">
-      <label>Client Name:</label>
+      <label for="client-name">Client Name:</label>
       <input type="text" id="client-name" required />
 
-      <label>Item:</label>
-      <input type="text" id="item" required />
+      <label for="amount">Amount (PKR):</label>
+      <input type="number" id="amount" required />
 
-      <label>Price:</label>
-      <input type="number" id="price" required />
+      <label for="date">Date:</label>
+      <input type="date" id="date" required />
 
-      <button type="button" onclick="addItem()">Add Item</button>
+      <button type="button" id="generate-btn">Generate Invoice</button>
+      <button type="button" id="download-btn">Download PDF</button>
     </form>
 
-    <div id="invoice-preview">
+    <!-- Invoice Preview -->
+    <div id="invoice-preview" style="display: none;">
       <h2>Invoice Preview</h2>
-      <p><strong>Client:</strong> <span id="display-client-name"></span></p>
-      <ul id="item-list"></ul>
-      <p><strong>Total:</strong> $<span id="total"></span></p>
+      <p><strong>Client Name:</strong> <span id="client-name-preview"></span></p>
+      <p><strong>Amount:</strong> Rs. <span id="amount-preview"></span></p>
+      <p><strong>Date:</strong> <span id="date-preview"></span></p>
     </div>
-
-    <button onclick="downloadPDF()">Download PDF</button>
   </div>
 
-  <!-- ✅ jsPDF library + your script -->
+  <!-- Script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="script.js"></script>
+  <script>
+    const generateBtn = document.getElementById("generate-btn");
+    const downloadBtn = document.getElementById("download-btn");
+
+    generateBtn.addEventListener("click", () => {
+      const name = document.getElementById("client-name").value;
+      const amount = document.getElementById("amount").value;
+      const date = document.getElementById("date").value;
+
+      if (!name || !amount || !date) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      document.getElementById("client-name-preview").textContent = name;
+      document.getElementById("amount-preview").textContent = amount;
+      document.getElementById("date-preview").textContent = date;
+
+      document.getElementById("invoice-preview").style.display = "block";
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      const name = document.getElementById("client-name").value;
+      const amount = document.getElementById("amount").value;
+      const date = document.getElementById("date").value;
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFontSize(16);
+      doc.text("Smart Invoice", 20, 20);
+      doc.setFontSize(12);
+      doc.text(`Client Name: ${name}`, 20, 40);
+      doc.text(`Amount: Rs. ${amount}`, 20, 50);
+      doc.text(`Date: ${date}`, 20, 60);
+
+      doc.save("invoice.pdf");
+    });
+  </script>
 </body>
 </html>
 

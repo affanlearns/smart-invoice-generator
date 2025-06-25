@@ -4,16 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Smart Invoice Generator</title>
+
+  <!-- ✅ SEO Meta Tags -->
+  <meta name="description" content="Generate professional invoices online. Create, preview, and download PDF invoices easily with Smart Invoice Generator.">
+  <meta name="keywords" content="invoice generator, PDF invoice, free invoice, smart invoice, Affan tools">
+  <meta name="author" content="Affan Hassan">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- ✅ Header Bar -->
   <header style="background-color: #007bff; color: white; padding: 15px; text-align: center; border-radius: 0 0 10px 10px;">
     <h1>🧾 Smart Invoice Generator</h1>
   </header>
 
-  <!-- Main Container -->
+  <!-- ✅ Main Container -->
   <div class="container">
     <h2>Enter Invoice Details</h2>
     <form id="invoice-form">
@@ -30,7 +36,7 @@
       <button type="button" id="download-btn">Download PDF</button>
     </form>
 
-    <!-- Invoice Preview -->
+    <!-- ✅ Invoice Preview -->
     <div id="invoice-preview" style="display: none;">
       <h2>Invoice Preview</h2>
       <p><strong>Client Name:</strong> <span id="client-name-preview"></span></p>
@@ -39,7 +45,7 @@
     </div>
   </div>
 
-  <!-- Script -->
+  <!-- ✅ Script: Invoice Generator -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     const generateBtn = document.getElementById("generate-btn");
@@ -82,4 +88,5 @@
   </script>
 </body>
 </html>
+
 
